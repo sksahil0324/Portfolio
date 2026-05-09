@@ -1,0 +1,173 @@
+I am uploading my resume(s). Carefully analyze ALL uploaded resumes and automatically generate a premium, modern, fully responsive personal portfolio website based completely on the information found in the resumes.
+
+Do NOT create generic placeholder content.
+
+Extract and intelligently organize:
+
+Name
+Professional summary
+Skills
+Projects
+Experience
+Certifications
+Education
+Leadership roles
+Achievements
+Contact information
+Social links
+Technologies used
+Career focus
+
+The website should reflect my real profile, technical strengths, and personal branding based on the uploaded resumes.
+
+Create a visually stunning portfolio suitable for:
+
+Software Engineering roles
+AI/ML Engineering roles
+Full Stack Developer roles
+Data Engineering roles
+Enterprise Technology roles
+
+The website should feel like a premium developer portfolio similar to top AI engineers and modern SaaS founders.
+
+Important Requirements
+Resume Parsing
+
+Carefully scan and understand:
+
+All projects
+Technologies
+Experience
+Leadership activities
+Technical strengths
+Career direction
+
+Use the resume data dynamically throughout the portfolio.
+
+Do not leave sections empty.
+
+Design Requirements
+
+Create:
+
+Dark futuristic UI
+Glassmorphism effects
+Smooth animations
+Gradient neon accents
+Interactive hover effects
+Premium typography
+Mobile responsive design
+Awwwards-style portfolio feel
+
+Use:
+
+Next.js
+React
+TypeScript
+Tailwind CSS
+Framer Motion
+Hero Section
+
+Generate:
+
+Professional intro
+Dynamic typing animation
+Resume download button
+Contact button
+Social icons
+Animated background
+
+Use professional titles automatically extracted from the resume.
+
+Projects Section
+
+Automatically create beautiful project cards from my resume projects with:
+
+Project descriptions
+Technologies
+Features
+Animations
+GitHub/demo placeholders
+Hover effects
+
+Make projects the highlight of the website.
+
+Skills Section
+
+Automatically categorize and display:
+
+Programming languages
+Frameworks
+AI/ML tools
+Databases
+Cloud tools
+Development tools
+
+Use animated skill cards.
+
+Experience Section
+
+Generate animated timeline cards using my internship and work experience from the resume.
+
+Certifications Section
+
+Automatically create certification cards from the resume.
+
+Leadership Section
+
+Highlight leadership roles, responsibilities, and achievements from the resume.
+
+Contact Section
+
+Create:
+
+Functional contact form
+Social media links
+Professional contact UI
+Admin Dashboard (Very Important)
+
+Create a secure Admin Dashboard where I can:
+
+Edit all portfolio data
+Add/remove/update projects
+Upload new resumes
+Change profile information
+Update skills
+Manage certifications
+Change themes/colors
+Upload project images
+Manage blogs later
+
+The admin panel should work like a CMS.
+
+Backend Requirements
+
+Use:
+
+Node.js + Express OR Next.js API routes
+MongoDB/PostgreSQL
+JWT Authentication
+Cloudinary integration
+Additional Features
+
+Include:
+
+AI resume parser
+AI-generated project summaries
+SEO optimization
+Fast loading
+Accessibility optimization
+Deployment-ready setup
+Final Output
+
+Generate:
+
+Complete frontend
+Complete backend
+Database schema
+Admin dashboard
+Authentication system
+README documentation
+Deployment instructions
+
+The final result should look like a premium professional portfolio built specifically from my uploaded resume data rather than generic templates.
