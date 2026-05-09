@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Award } from "lucide-react";
+import { GraduationCap, MapPin, Award, UserCircle } from "lucide-react";
 import { defaultPortfolioData } from "@/lib/portfolioData";
+import { useProfilePhoto } from "@/hooks/use-profile-photo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -12,6 +13,7 @@ const fadeUp = {
 
 export function About() {
   const a = defaultPortfolioData.about;
+  const { photo } = useProfilePhoto();
 
   return (
     <section id="about" className="py-24 relative">
@@ -29,6 +31,39 @@ export function About() {
             initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7 }}
           >
+            {/* Profile photo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-8 flex items-center gap-6"
+            >
+              <div className="relative shrink-0">
+                <div className="w-28 h-28 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg shadow-primary/10">
+                  {photo ? (
+                    <img
+                      src={photo}
+                      alt="Sahil Basheer Shaik"
+                      className="w-full h-full object-cover"
+                      data-testid="img-profile"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-primary/10 flex items-center justify-center">
+                      <UserCircle size={56} className="text-primary/40" />
+                    </div>
+                  )}
+                </div>
+                {/* Glow ring */}
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent blur-md -z-10" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold">Sahil Basheer Shaik</h3>
+                <p className="text-primary text-sm font-mono mt-0.5">Software Engineer · ML Engineer</p>
+                <p className="text-muted-foreground text-sm mt-1">Navi Mumbai, India</p>
+              </div>
+            </motion.div>
+
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">{a.bio}</p>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">{a.bio2}</p>
             <div className="flex flex-wrap gap-3">

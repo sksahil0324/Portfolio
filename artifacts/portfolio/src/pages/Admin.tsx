@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, FolderKanban, Zap, Briefcase, Award, Users, UserCircle, Settings,
-  LogOut, Plus, Trash2, Save, X, ChevronDown, ChevronUp, RotateCcw, ExternalLink
+  LogOut, Plus, Trash2, Save, X, ChevronDown, ChevronUp, RotateCcw, ExternalLink,
+  Upload, ImageIcon
 } from "lucide-react";
+import { useProfilePhoto } from "@/hooks/use-profile-photo";
 import { Button } from "@/components/ui/button";
 import { usePortfolio } from "@/context/PortfolioContext";
 import type {
@@ -311,6 +313,89 @@ function LeadershipTab() {
   );
 }
 
+function PhotoUploadCard() {
+  const { photo, setPhoto, removePhoto } = useProfilePhoto();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
+  const [error, setError] = useState("");
+
+  const processFile = (file: File) => {
+    setError("");
+    if (!file.type.startsWith("image/")) { setError("Please select an image file (JPG, PNG, WebP)."); return; }
+    if (file.size > 5 * 1024 * 1024) { setError("Image must be under 5 MB."); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => { if (e.target?.result) setPhoto(e.target.result as string); };
+    reader.readAsDataURL(file);
+  };
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) processFile(file);
+    e.target.value = "";
+  };
+
+  const onDrop = (e: React.DragEvent) => {
+    e.preventDefault(); setDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) processFile(file);
+  };
+
+  return (
+    <div className="glass-card rounded-xl p-5 space-y-4">
+      <h3 className="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+        <ImageIcon size={14} /> Profile Photo
+      </h3>
+
+      <div className="flex items-start gap-5">
+        {/* Preview */}
+        <div className="shrink-0">
+          <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-white/10 bg-muted/50 flex items-center justify-center">
+            {photo
+              ? <img src={photo} alt="Profile" className="w-full h-full object-cover" data-testid="img-admin-preview" />
+              : <UserCircle size={40} className="text-muted-foreground/40" />}
+          </div>
+        </div>
+
+        {/* Upload area */}
+        <div className="flex-1 space-y-3">
+          <div
+            onDragOver={e => { e.preventDefault(); setDragging(true); }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={onDrop}
+            onClick={() => inputRef.current?.click()}
+            className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-all duration-200 ${dragging ? "border-primary bg-primary/10" : "border-white/15 hover:border-primary/50 hover:bg-primary/5"}`}
+            data-testid="drop-zone-photo"
+          >
+            <Upload size={20} className="mx-auto mb-2 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">
+              <span className="text-primary font-medium">Click to upload</span> or drag &amp; drop
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">JPG, PNG, WebP · Max 5 MB</p>
+          </div>
+
+          <input
+            ref={inputRef} type="file" accept="image/*" onChange={onFileChange}
+            className="hidden" data-testid="input-photo-file"
+          />
+
+          {error && <p className="text-xs text-destructive">{error}</p>}
+
+          <div className="flex gap-2">
+            <Button size="sm" onClick={() => inputRef.current?.click()} className="gap-1.5 flex-1" data-testid="button-upload-photo">
+              <Upload size={13} /> Upload Photo
+            </Button>
+            {photo && (
+              <Button size="sm" variant="outline" onClick={removePhoto} className="gap-1.5 text-destructive border-destructive/30 hover:bg-destructive/10" data-testid="button-remove-photo">
+                <Trash2 size={13} /> Remove
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AboutTab() {
   const { data, setData } = usePortfolio();
   const a = data.about;
@@ -319,6 +404,7 @@ function AboutTab() {
 
   return (
     <div className="space-y-5">
+      <PhotoUploadCard />
       <div className="glass-card rounded-xl p-5 space-y-4">
         <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Bio</h3>
         <Field label="Bio Paragraph 1" value={a.bio} onChange={v => u({ bio: v })} multiline />
