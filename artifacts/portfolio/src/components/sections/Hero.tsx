@@ -82,7 +82,9 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <button
           onClick={() => scrollTo("hero")}
-          className="text-xl font-bold text-primary glow-text tracking-tight hover:opacity-80 transition-opacity"
+          onDoubleClick={() => { window.location.href = "/admin"; }}
+          className="text-xl font-bold text-primary glow-text tracking-tight hover:opacity-80 transition-opacity select-none"
+          title="Double-click to access admin"
           data-testid="nav-logo"
         >
           SBS.
