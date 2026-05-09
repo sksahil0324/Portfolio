@@ -1,68 +1,41 @@
 import { motion } from "framer-motion";
 import { Users, FlaskConical, Calendar } from "lucide-react";
-
-const leadership = [
-  {
-    role: "Treasurer",
-    org: "ISTE-RAIT",
-    period: "July 2025 – Present",
-    location: "Navi Mumbai, India",
-    icon: Users,
-    color: "primary",
-    points: [
-      "Overseeing financial planning, budgeting, and fund allocation for ISTE activities to ensure transparent resource management.",
-      "Coordinating with faculty, sponsors, and stakeholders for smooth execution of workshops, hackathons, and technical events across banking, R&D, and BFSI domains.",
-      "Facilitating collaboration and knowledge-sharing through cross-domain events, supporting organizational operations and student development.",
-    ],
-  },
-  {
-    role: "Alteryx Data Analytics Workshop Participant",
-    org: "EduSkills TECH CAMP — EduSkills Foundation",
-    period: "October 2024",
-    location: "India",
-    icon: FlaskConical,
-    color: "secondary",
-    points: [
-      "Engineered end-to-end automated data workflows using Alteryx, covering data cleansing, ETL pipelines, and performance optimization while following clean coding practices.",
-      "Converted raw datasets into actionable insights via dashboards for real-world business cases, demonstrating strong analytical and presentation skills.",
-      "Participated in a research project with a pharmaceutical partner (Pfizer) to interpret data insights and ensure compliance with industry regulations.",
-      "Applied data-integrity principles and best practices in a lab environment, focusing on industrialization and regulatory adherence.",
-    ],
-  },
-];
+import { usePortfolio } from "@/context/PortfolioContext";
 
 const colorMap: Record<string, { text: string; bg: string; border: string; dot: string }> = {
   primary: { text: "text-primary", bg: "bg-primary/10", border: "border-primary/20", dot: "bg-primary" },
   secondary: { text: "text-secondary", bg: "bg-secondary/10", border: "border-secondary/20", dot: "bg-secondary" },
+  accent: { text: "text-accent", bg: "bg-accent/10", border: "border-accent/20", dot: "bg-accent" },
+  "chart-4": { text: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20", dot: "bg-purple-400" },
+  "chart-5": { text: "text-teal-400", bg: "bg-teal-500/10", border: "border-teal-500/20", dot: "bg-teal-400" },
 };
 
+const fallback = colorMap.primary;
+
 export function Leadership() {
+  const { data } = usePortfolio();
+
   return (
     <section id="leadership" className="py-24 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent pointer-events-none" />
       <div className="container mx-auto px-4 max-w-5xl relative">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16"
         >
           <p className="text-primary text-sm font-mono uppercase tracking-widest mb-3">06. Leadership</p>
           <h2 className="text-4xl md:text-5xl font-bold">Beyond the Code</h2>
         </motion.div>
 
         <div className="space-y-8">
-          {leadership.map((item, idx) => {
-            const c = colorMap[item.color];
-            const Icon = item.icon;
+          {data.leadership.map((item, idx) => {
+            const c = colorMap[item.color] ?? fallback;
+            const Icon = item.iconType === "flask" ? FlaskConical : Users;
             return (
               <motion.div
-                key={item.org}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.15 }}
                 className={`glass-card rounded-2xl p-8 border ${c.border} hover:border-opacity-60 transition-all duration-300`}
                 data-testid={`leadership-${idx}`}
               >
