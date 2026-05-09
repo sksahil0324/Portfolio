@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { GraduationCap, MapPin, Award } from "lucide-react";
-import { usePortfolio } from "@/context/PortfolioContext";
+import { defaultPortfolioData } from "@/lib/portfolioData";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -11,8 +11,7 @@ const fadeUp = {
 };
 
 export function About() {
-  const { data } = usePortfolio();
-  const a = data.about;
+  const a = defaultPortfolioData.about;
 
   return (
     <section id="about" className="py-24 relative">
@@ -42,36 +41,22 @@ export function About() {
           </motion.div>
 
           <div className="space-y-6">
-            <motion.div
-              custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="glass-card rounded-xl p-6"
-            >
+            <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass-card rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-primary/10 shrink-0">
-                  <GraduationCap className="text-primary" size={22} />
-                </div>
+                <div className="p-3 rounded-lg bg-primary/10 shrink-0"><GraduationCap className="text-primary" size={22} /></div>
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">{a.degree}</h3>
                   <p className="text-sm text-muted-foreground">Minor: {a.minor}</p>
                   <p className="text-sm text-muted-foreground mt-1">{a.university}</p>
                   <p className="text-sm text-muted-foreground">{a.universityPeriod}</p>
-                  <div className="mt-3 flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">
-                      CGPA: {a.cgpa} / 10
-                    </span>
-                  </div>
+                  <div className="mt-3"><span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">CGPA: {a.cgpa} / 10</span></div>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div
-              custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="glass-card rounded-xl p-6"
-            >
+            <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass-card rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary/10 shrink-0">
-                  <Award className="text-secondary" size={22} />
-                </div>
+                <div className="p-3 rounded-lg bg-secondary/10 shrink-0"><Award className="text-secondary" size={22} /></div>
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">12th Grade</h3>
                   <p className="text-sm text-muted-foreground">{a.school12}</p>
@@ -81,14 +66,9 @@ export function About() {
               </div>
             </motion.div>
 
-            <motion.div
-              custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="glass-card rounded-xl p-6"
-            >
+            <motion.div custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass-card rounded-xl p-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-accent/10 shrink-0">
-                  <MapPin className="text-accent" size={22} />
-                </div>
+                <div className="p-3 rounded-lg bg-accent/10 shrink-0"><MapPin className="text-accent" size={22} /></div>
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">10th Grade</h3>
                   <p className="text-sm text-muted-foreground">{a.school10}</p>
