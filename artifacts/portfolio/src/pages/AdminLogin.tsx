@@ -100,12 +100,7 @@ export default function AdminLogin() {
             </Button>
           </form>
 
-          <p className="text-center text-xs text-muted-foreground mt-6">
-            Default password:{" "}
-            <code className="bg-muted px-1.5 py-0.5 rounded text-primary">admin@sahil2026</code>
-          </p>
-
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center">
             <button
               onClick={() => setLocation("/")}
               className="text-xs text-muted-foreground hover:text-primary transition-colors"
